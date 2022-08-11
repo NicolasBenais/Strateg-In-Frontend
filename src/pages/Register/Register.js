@@ -35,7 +35,8 @@ export default function Register({ isTokenPresent }) {
   return isTokenPresent ? (
     <Navigate to="/users" />
   ) : (
-    <main>
+    <main className={styles.main}>
+      <h2 className={styles.h2}>Sign Up !</h2>
       <form className={styles.form} onSubmit={handleSubmit}>
         <label className={styles.label} htmlFor="email">
           Email:
@@ -62,9 +63,11 @@ export default function Register({ isTokenPresent }) {
         <button className={styles.button} type="submit">
           Create your account
         </button>
-        <Link to="/login">Already registered ? Click here to log in !</Link>
       </form>
-      {errorMessage && <p>{errorMessage}</p>}
+      <Link className={styles.link} to="/login">
+        Already registered ?<br></br>Click here to log in !
+      </Link>
+      {errorMessage && <p className={styles.error}>{errorMessage}</p>}
     </main>
   );
 }

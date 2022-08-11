@@ -38,7 +38,8 @@ export default function Login({ isTokenPresent, setIsTokenPresent }) {
   return isTokenPresent ? (
     <Navigate to="/users" />
   ) : (
-    <main>
+    <main className={styles.main}>
+      <h2 className={styles.h2}>Log In !</h2>
       <form className={styles.form} onSubmit={handleSubmit}>
         <label className={styles.label} htmlFor="email">
           Email:
@@ -65,11 +66,11 @@ export default function Login({ isTokenPresent, setIsTokenPresent }) {
         <button className={styles.button} type="submit">
           Log In
         </button>
-        <Link to="/register">
-          You don't have an account ? Click here to register !
-        </Link>
       </form>
-      {errorMessage && <p>{errorMessage}</p>}
+      <Link className={styles.link} to="/register">
+        You don't have an account ?<br></br>Click here to register !
+      </Link>
+      {errorMessage && <p className={styles.error}>{errorMessage}</p>}
     </main>
   );
 }
