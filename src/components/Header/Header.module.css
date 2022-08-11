@@ -1,0 +1,138 @@
+.header {
+  background-color: #073aa9;
+  padding: 0 1.25em;
+  display: flex;
+  justify-content: space-between;
+}
+
+.menu,
+.shownMenu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 0;
+  position: fixed;
+  right: -100vw;
+  bottom: 0;
+  top: 4em;
+  padding: 2em;
+  visibility: hidden;
+  transition: all 0.8s ease-out;
+  background-color: white;
+}
+
+.shownMenu {
+  right: 0;
+  width: 100vw;
+  visibility: visible;
+}
+
+.opennedButton,
+.closedButton,
+.logoutButton {
+  background: transparent;
+  border: none;
+}
+
+.logoutButton {
+  color: white;
+  font-weight: 600;
+  font-size: 1.5em;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.logoutButton:active {
+  transform: scale(0.98);
+}
+
+.opennedButton_line,
+.closedButton_line,
+.opennedButton_line::before,
+.closedButton_line::before,
+.opennedButton_line::after,
+.closedButton_line::after {
+  display: block;
+  width: 2.5em;
+  height: 3px;
+  position: relative;
+  border-radius: 3px;
+  background-color: white;
+  transition: all 0.5s ease-in-out;
+}
+
+.opennedButton_line::before,
+.closedButton_line::before,
+.opennedButton_line::after,
+.closedButton_line::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+
+.opennedButton_line::before,
+.closedButton_line::before {
+  transform: translateY(-12px);
+}
+
+.opennedButton_line::after,
+.closedButton_line::after {
+  transform: translateY(12px);
+}
+
+.opennedButton_line {
+  background: transparent;
+}
+
+.opennedButton_line::before {
+  transform: rotate(45deg);
+}
+
+.opennedButton_line::after {
+  transform: rotate(-45deg);
+}
+
+.link {
+  font-size: 2em;
+  text-decoration: none;
+  color: #070b0e;
+}
+
+.link:not(:last-child) {
+  margin-bottom: 2em;
+}
+
+@media (min-width: 768px) {
+  .opennedButton,
+  .closedButton {
+    display: none;
+  }
+
+  .menu {
+    visibility: visible;
+    flex-direction: row;
+    height: 2em;
+    width: auto;
+    background: transparent;
+    position: initial;
+  }
+
+  .link {
+    color: white;
+    font-size: 1.5em;
+  }
+
+  .link:active {
+    transform: scale(0.98);
+  }
+
+  .link:nth-child(1) {
+    display: none;
+  }
+
+  .link:not(:last-child) {
+    margin-right: 1em;
+  }
+}

@@ -4,12 +4,13 @@ import { useState } from "react";
 import Cookies from "js-cookie";
 
 // Pages
+import Home from "./pages/Home/Home";
 import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
 import Users from "./pages/Users/Users";
 
 // Components
-import Header from "./components/Header";
+import Header from "./components/Header/Header";
 
 function App() {
   const [isTokenPresent, setIsTokenPresent] = useState(
@@ -18,8 +19,13 @@ function App() {
 
   return (
     <Router>
-      <Header isTokenPresent={isTokenPresent} />
+      <Header
+        isTokenPresent={isTokenPresent}
+        setIsTokenPresent={setIsTokenPresent}
+      />
       <Routes>
+        <Route path="/" element={<Home isTokenPresent={isTokenPresent} />} />
+
         <Route
           path="/register"
           element={
