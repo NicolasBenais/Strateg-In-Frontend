@@ -43,7 +43,7 @@ export default function Header({ isTokenPresent, setIsTokenPresent }) {
           className={isTokenPresent ? styles.disabled : styles.link}
           onClick={() => setShownMenu(false)}
         >
-          Register
+          Sign Up
         </Link>
 
         <Link
