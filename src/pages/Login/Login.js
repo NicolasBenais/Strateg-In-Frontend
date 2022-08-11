@@ -65,7 +65,7 @@ export default function Login({ isTokenPresent, setIsTokenPresent }) {
         <button className={styles.button} type="submit">
           Log In
         </button>
-        <Link to="/login">
+        <Link to="/register">
           You don't have an account ? Click here to register !
         </Link>
       </form>
