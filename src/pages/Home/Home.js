@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
-
-// Styles
-import styles from "./Home.module.css";
+import { Navigate } from "react-router-dom";
 
 export default function Home({ isTokenPresent }) {
-  return <main className={styles.main}>Home</main>;
+  return isTokenPresent ? (
+    <Navigate to="/users" />
+  ) : (
+    <Navigate to="/register" />
+  );
 }

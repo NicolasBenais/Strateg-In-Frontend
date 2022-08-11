@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 // Styles
@@ -6,12 +6,21 @@ import styles from "./Header.module.css";
 
 // Assets
 import Logo from "../../assets/logo";
+import Cookies from "js-cookie";
 
 export default function Header({ isTokenPresent, setIsTokenPresent }) {
+  const navigate = useNavigate();
+
   const [shownMenu, setShownMenu] = useState(false);
 
   const handleShownMenu = () => {
     setShownMenu(!shownMenu);
+  };
+
+  const logOut = () => {
+    setIsTokenPresent(false);
+    Cookies.remove("token");
+    navigate("/register");
   };
 
   return (
@@ -55,13 +64,9 @@ export default function Header({ isTokenPresent, setIsTokenPresent }) {
           ></span>
         </button>
       ) : (
-        <Link
-          to="/"
-          className={styles.logoutButton}
-          onClick={() => setIsTokenPresent(false)}
-        >
+        <button className={styles.logoutButton} onClick={logOut}>
           Logout
-        </Link>
+        </button>
       )}
     </header>
   );

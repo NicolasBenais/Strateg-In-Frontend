@@ -1,7 +1,7 @@
-export default function Logo({ width, height }) {
+export default function Logo({ height }) {
   return (
     <img
-      style={{ width: width, height: height }}
+      style={{ height: height }}
       src="https://strateg.in/static/media/logo.78504dc1.png"
       alt="Strateg In Logo"
     />
