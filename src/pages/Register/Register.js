@@ -15,21 +15,25 @@ export default function Register({ isTokenPresent }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    try {
-      setErrorMessage("");
+    if (password.length < 8) {
+      setErrorMessage("Your password must contain at least eight characters");
+    } else {
+      try {
+        setErrorMessage("");
 
-      // eslint-disable-next-line no-unused-vars
-      const response = await axios.post(
-        "https://strateg-in.herokuapp.com/register",
-        {
-          email,
-          password,
-        }
-      );
+        // eslint-disable-next-line no-unused-vars
+        const response = await axios.post(
+          "https://strateg-in.herokuapp.com/register",
+          {
+            email,
+            password,
+          }
+        );
 
-      navigate("/login");
-    } catch (error) {
-      setErrorMessage(error.response.data.message);
+        navigate("/login");
+      } catch (error) {
+        setErrorMessage(error.response.data.message);
+      }
     }
   };
 
