@@ -28,16 +28,20 @@ export default function Users({ isTokenPresent }) {
 
   return !isTokenPresent ? (
     <Navigate to="/register" />
-  ) : isLoading ? (
-    <p>Loading...</p>
   ) : (
     <main className={styles.main}>
-      <h2>Registered users</h2>
-      <ul className={styles.list}>
-        {data.map((user) => {
-          return <li key={user._id}>{user.email}</li>;
-        })}
-      </ul>
+      {isLoading ? (
+        <p className={styles.loader}>Loading...</p>
+      ) : (
+        <>
+          <h2 className={styles.h2}>Registered users</h2>
+          <ul className={styles.list}>
+            {data.map((user) => {
+              return <li key={user._id}>{user.email}</li>;
+            })}
+          </ul>
+        </>
+      )}
     </main>
   );
 }

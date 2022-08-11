@@ -39,14 +39,14 @@ export default function Header({ isTokenPresent, setIsTokenPresent }) {
         </Link>
         <Link
           to="/register"
-          className={styles.link}
+          className={isTokenPresent ? styles.disabled : styles.link}
           onClick={() => setShownMenu(false)}
         >
           Register
         </Link>
         <Link
           to="/login"
-          className={styles.link}
+          className={isTokenPresent ? styles.disabled : styles.link}
           onClick={() => setShownMenu(false)}
         >
           Log In
