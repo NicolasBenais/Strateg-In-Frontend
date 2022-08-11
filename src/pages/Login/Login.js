@@ -26,11 +26,11 @@ export default function Login({ isTokenPresent, setIsTokenPresent }) {
           password,
         }
       );
+
       Cookies.set("token", response.data.token);
       setIsTokenPresent(true);
       navigate("/users");
     } catch (error) {
-      console.log(error.response.data.message);
       setErrorMessage(error.response.data.message);
     }
   };
@@ -40,10 +40,12 @@ export default function Login({ isTokenPresent, setIsTokenPresent }) {
   ) : (
     <main className={styles.main}>
       <h2 className={styles.h2}>Log In !</h2>
+
       <form className={styles.form} onSubmit={handleSubmit}>
         <label className={styles.label} htmlFor="email">
           Email:
         </label>
+
         <input
           className={styles.input}
           type="email"
@@ -55,6 +57,7 @@ export default function Login({ isTokenPresent, setIsTokenPresent }) {
         <label className={styles.label} htmlFor="password">
           Password:
         </label>
+
         <input
           className={styles.input}
           type="password"
@@ -67,9 +70,11 @@ export default function Login({ isTokenPresent, setIsTokenPresent }) {
           Log In
         </button>
       </form>
+
       <Link className={styles.link} to="/register">
         You don't have an account ?<br></br>Click here to register !
       </Link>
+
       {errorMessage && <p className={styles.error}>{errorMessage}</p>}
     </main>
   );

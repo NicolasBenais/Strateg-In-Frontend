@@ -17,6 +17,7 @@ export default function Register({ isTokenPresent }) {
 
     try {
       setErrorMessage("");
+
       // eslint-disable-next-line no-unused-vars
       const response = await axios.post(
         "https://strateg-in.herokuapp.com/register",
@@ -25,9 +26,9 @@ export default function Register({ isTokenPresent }) {
           password,
         }
       );
+
       navigate("/login");
     } catch (error) {
-      console.log(error.response.data.message);
       setErrorMessage(error.response.data.message);
     }
   };
@@ -37,10 +38,12 @@ export default function Register({ isTokenPresent }) {
   ) : (
     <main className={styles.main}>
       <h2 className={styles.h2}>Sign Up !</h2>
+
       <form className={styles.form} onSubmit={handleSubmit}>
         <label className={styles.label} htmlFor="email">
           Email:
         </label>
+
         <input
           className={styles.input}
           type="email"
@@ -52,6 +55,7 @@ export default function Register({ isTokenPresent }) {
         <label className={styles.label} htmlFor="password">
           Password:
         </label>
+
         <input
           className={styles.input}
           type="password"
@@ -64,9 +68,11 @@ export default function Register({ isTokenPresent }) {
           Create your account
         </button>
       </form>
+
       <Link className={styles.link} to="/login">
         Already registered ?<br></br>Click here to log in !
       </Link>
+
       {errorMessage && <p className={styles.error}>{errorMessage}</p>}
     </main>
   );

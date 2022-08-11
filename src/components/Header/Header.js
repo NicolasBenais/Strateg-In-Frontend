@@ -37,6 +37,7 @@ export default function Header({ isTokenPresent, setIsTokenPresent }) {
         >
           Home
         </Link>
+
         <Link
           to="/register"
           className={isTokenPresent ? styles.disabled : styles.link}
@@ -44,6 +45,7 @@ export default function Header({ isTokenPresent, setIsTokenPresent }) {
         >
           Register
         </Link>
+
         <Link
           to="/login"
           className={isTokenPresent ? styles.disabled : styles.link}
@@ -52,6 +54,7 @@ export default function Header({ isTokenPresent, setIsTokenPresent }) {
           Log In
         </Link>
       </nav>
+
       {!isTokenPresent ? (
         <button
           className={shownMenu ? styles.opennedButton : styles.closedButton}

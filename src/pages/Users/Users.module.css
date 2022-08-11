@@ -1,6 +1,5 @@
 .main {
   display: flex;
-  /* justify-content: center; */
   align-items: center;
   height: 100vh;
   width: 100vw;
@@ -8,7 +7,8 @@
   padding: 62px 2em 0 2em;
 }
 
-.loader {
+.loader,
+.error {
   text-align: center;
   font-size: 1.25em;
 }
