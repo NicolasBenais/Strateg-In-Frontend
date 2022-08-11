@@ -15,6 +15,7 @@ export default function Register({ isTokenPresent, setIsTokenPresent }) {
     event.preventDefault();
 
     try {
+      setErrorMessage("");
       const response = await axios.post(
         "https://strateg-in.herokuapp.com/register",
         {
@@ -26,7 +27,7 @@ export default function Register({ isTokenPresent, setIsTokenPresent }) {
       setIsTokenPresent(true);
     } catch (error) {
       console.log(error.response.data.message);
-      setErrorMessage(error.response.data.mesage);
+      setErrorMessage(error.response.data.message);
     }
   };
 
@@ -61,6 +62,7 @@ export default function Register({ isTokenPresent, setIsTokenPresent }) {
           Create your account
         </button>
       </form>
+      {errorMessage && <p>{errorMessage}</p>}
     </main>
   );
 }
