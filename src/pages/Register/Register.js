@@ -1,12 +1,13 @@
 import axios from "axios";
-import Cookies from "js-cookie";
 import { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate, Link } from "react-router-dom";
 
 // Styles
 import styles from "./Register.module.css";
 
-export default function Register({ isTokenPresent, setIsTokenPresent }) {
+export default function Register({ isTokenPresent }) {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -16,6 +17,7 @@ export default function Register({ isTokenPresent, setIsTokenPresent }) {
 
     try {
       setErrorMessage("");
+      // eslint-disable-next-line no-unused-vars
       const response = await axios.post(
         "https://strateg-in.herokuapp.com/register",
         {
@@ -23,8 +25,7 @@ export default function Register({ isTokenPresent, setIsTokenPresent }) {
           password,
         }
       );
-      Cookies.set("token", response.data.token);
-      setIsTokenPresent(true);
+      navigate("/login");
     } catch (error) {
       console.log(error.response.data.message);
       setErrorMessage(error.response.data.message);
@@ -61,6 +62,7 @@ export default function Register({ isTokenPresent, setIsTokenPresent }) {
         <button className={styles.button} type="submit">
           Create your account
         </button>
+        <Link to="/login">Already registered ? Click here to log in !</Link>
       </form>
       {errorMessage && <p>{errorMessage}</p>}
     </main>
