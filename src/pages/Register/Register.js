@@ -24,8 +24,8 @@ export default function Register({ isTokenPresent }) {
 
         // eslint-disable-next-line no-unused-vars
         const response = await axios.post(
-          // "https://strateg-in.herokuapp.com/register",
-          "http://localhost:4000/register",
+          "https://strateg-in.herokuapp.com/register",
+          // "http://localhost:4000/register",
           {
             email,
             name,

@@ -22,7 +22,7 @@ export default function Profile({ isTokenPresent }) {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:4000/user/${userToken}`
+          `https://strateg-in.herokuapp.com/user/${userToken}`
         );
         setUser(response.data);
         setName(response.data.name);
@@ -48,10 +48,13 @@ export default function Profile({ isTokenPresent }) {
         setErrorMessage("You must enter a name");
       } else {
         // eslint-disable-next-line no-unused-vars
-        const response = await axios.post("http://localhost:4000/user/update", {
-          userId,
-          name,
-        });
+        const response = await axios.post(
+          "https://strateg-in.herokuapp.com/user/update",
+          {
+            userId,
+            name,
+          }
+        );
 
         setUpdatedInformations(true);
       }
