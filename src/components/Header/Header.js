@@ -38,39 +38,49 @@ export default function Header({ isTokenPresent, setIsTokenPresent }) {
           Home
         </Link>
 
-        <Link
-          to="/register"
-          className={isTokenPresent ? styles.disabled : styles.link}
-          onClick={() => setShownMenu(false)}
-        >
-          Sign Up
-        </Link>
+        {!isTokenPresent ? (
+          <Link
+            to="/register"
+            className={isTokenPresent ? styles.disabled : styles.link}
+            onClick={() => setShownMenu(false)}
+          >
+            Sign Up
+          </Link>
+        ) : (
+          <Link
+            to="/profile"
+            className={styles.link}
+            onClick={() => setShownMenu(false)}
+          >
+            Profile
+          </Link>
+        )}
 
-        <Link
-          to="/login"
-          className={isTokenPresent ? styles.disabled : styles.link}
-          onClick={() => setShownMenu(false)}
-        >
-          Log In
-        </Link>
+        {!isTokenPresent ? (
+          <Link
+            to="/login"
+            className={isTokenPresent ? styles.disabled : styles.link}
+            onClick={() => setShownMenu(false)}
+          >
+            Log In
+          </Link>
+        ) : (
+          <button className={styles.logoutButton} onClick={logOut}>
+            Logout
+          </button>
+        )}
       </nav>
 
-      {!isTokenPresent ? (
-        <button
-          className={shownMenu ? styles.opennedButton : styles.closedButton}
-          onClick={handleShownMenu}
-        >
-          <span
-            className={
-              shownMenu ? styles.opennedButton_line : styles.closedButton_line
-            }
-          ></span>
-        </button>
-      ) : (
-        <button className={styles.logoutButton} onClick={logOut}>
-          Logout
-        </button>
-      )}
+      <button
+        className={shownMenu ? styles.opennedButton : styles.closedButton}
+        onClick={handleShownMenu}
+      >
+        <span
+          className={
+            shownMenu ? styles.opennedButton_line : styles.closedButton_line
+          }
+        ></span>
+      </button>
     </header>
   );
 }

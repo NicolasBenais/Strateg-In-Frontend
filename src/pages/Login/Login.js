@@ -29,14 +29,14 @@ export default function Login({ isTokenPresent, setIsTokenPresent }) {
 
       Cookies.set("token", response.data.token);
       setIsTokenPresent(true);
-      navigate("/users");
+      navigate("/");
     } catch (error) {
       setErrorMessage(error.response.data.message);
     }
   };
 
   return isTokenPresent ? (
-    <Navigate to="/users" />
+    <Navigate to="/" />
   ) : (
     <main className={styles.main}>
       <h2 className={styles.h2}>Log In !</h2>

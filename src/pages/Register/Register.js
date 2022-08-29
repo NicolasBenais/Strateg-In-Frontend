@@ -9,6 +9,7 @@ export default function Register({ isTokenPresent }) {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -23,9 +24,11 @@ export default function Register({ isTokenPresent }) {
 
         // eslint-disable-next-line no-unused-vars
         const response = await axios.post(
-          "https://strateg-in.herokuapp.com/register",
+          // "https://strateg-in.herokuapp.com/register",
+          "http://localhost:4000/register",
           {
             email,
+            name,
             password,
           }
         );
@@ -38,7 +41,7 @@ export default function Register({ isTokenPresent }) {
   };
 
   return isTokenPresent ? (
-    <Navigate to="/users" />
+    <Navigate to="/" />
   ) : (
     <main className={styles.main}>
       <h2 className={styles.h2}>Sign Up !</h2>
@@ -54,6 +57,18 @@ export default function Register({ isTokenPresent }) {
           id="email"
           placeholder="Email"
           onChange={(event) => setEmail(event.target.value)}
+        />
+
+        <label className={styles.label} htmlFor="name">
+          Name:
+        </label>
+
+        <input
+          className={styles.input}
+          type="text"
+          id="name"
+          placeholder="Name"
+          onChange={(event) => setName(event.target.value)}
         />
 
         <label className={styles.label} htmlFor="password">
