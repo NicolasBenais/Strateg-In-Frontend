@@ -7,8 +7,8 @@ import Cookies from "js-cookie";
 import Home from "./pages/Home/Home";
 import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
-import Users from "./pages/Users/Users";
 import Profile from "./pages/Profile/Profile";
+import AddTask from "./pages/Tasks/AddTask/AddTask";
 
 // Components
 import Header from "./components/Header/Header";
@@ -48,13 +48,13 @@ function App() {
         />
 
         <Route
-          path="/users"
-          element={<Users isTokenPresent={isTokenPresent} />}
+          path="/profile"
+          element={<Profile isTokenPresent={isTokenPresent} />}
         />
 
         <Route
-          path="/profile"
-          element={<Profile isTokenPresent={isTokenPresent} />}
+          path="/tasks/add-task"
+          element={<AddTask isTokenPresent={isTokenPresent} />}
         />
       </Routes>
     </Router>

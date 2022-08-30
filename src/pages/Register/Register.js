@@ -10,32 +10,52 @@ export default function Register({ isTokenPresent }) {
 
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+
+  const verifyFormInformations = () => {
+    if (!email || !name || !surname || !password) {
+      setErrorMessage("Please fill all fields");
+      return false;
+    }
+    return true;
+  };
+
+  const verifyPassword = () => {
+    if (password.length < 8) {
+      setErrorMessage("Your password must contain at least eight characters");
+      return false;
+    }
+    return true;
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (password.length < 8) {
-      setErrorMessage("Your password must contain at least eight characters");
-    } else {
-      try {
-        setErrorMessage("");
+    const firstVerification = verifyFormInformations();
+    if (firstVerification) {
+      const secondVerification = verifyPassword();
+      if (secondVerification) {
+        try {
+          setErrorMessage("");
 
-        // eslint-disable-next-line no-unused-vars
-        const response = await axios.post(
-          "https://strateg-in.herokuapp.com/register",
-          // "http://localhost:4000/register",
-          {
-            email,
-            name,
-            password,
-          }
-        );
+          // eslint-disable-next-line no-unused-vars
+          const response = await axios.post(
+            // "https://strateg-in.herokuapp.com/register",
+            "http://localhost:4000/register",
+            {
+              email,
+              name,
+              surname,
+              password,
+            }
+          );
 
-        navigate("/login");
-      } catch (error) {
-        setErrorMessage(error.response.data.message);
+          navigate("/login");
+        } catch (error) {
+          setErrorMessage(error.response.data.message);
+        }
       }
     }
   };
@@ -69,6 +89,18 @@ export default function Register({ isTokenPresent }) {
           id="name"
           placeholder="Name"
           onChange={(event) => setName(event.target.value)}
+        />
+
+        <label className={styles.label} htmlFor="surname">
+          Surname:
+        </label>
+
+        <input
+          className={styles.input}
+          type="text"
+          id="surname"
+          placeholder="Surname"
+          onChange={(event) => setSurname(event.target.value)}
         />
 
         <label className={styles.label} htmlFor="password">

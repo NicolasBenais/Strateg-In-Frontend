@@ -11,23 +11,25 @@ export default function Profile({ isTokenPresent }) {
   const [user, setUser] = useState(null);
 
   const [name, setName] = useState("");
-
+  const [surname, setSurname] = useState("");
   const [password, setPassword] = useState("");
 
   const [errorMessage, setErrorMessage] = useState("");
 
   const [updatedInformations, setUpdatedInformations] = useState(false);
 
-  const userToken = Cookies.get("token");
+  const userId = Cookies.get("userId");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://strateg-in.herokuapp.com/user/${userToken}`
+          // `https://strateg-in.herokuapp.com/user/${userToken}`
+          `http://localhost:4000/user/${userId}`
         );
         setUser(response.data);
         setName(response.data.name);
+        setSurname(response.data.surname);
         setIsLoading(false);
       } catch (error) {
         console.log(error);
@@ -38,6 +40,36 @@ export default function Profile({ isTokenPresent }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const verifyPassword = () => {
+    if (password) {
+      if (password.length < 8) {
+        setErrorMessage("Your password must contain at least eight characters");
+        return false;
+      }
+      return true;
+    }
+    return false;
+  };
+
+  const verifyName = () => {
+    if (name.length < 1 || surname.length < 1) {
+      setErrorMessage("Please fill all fields");
+      return false;
+    }
+    return true;
+  };
+
+  const verifyNameWithoutPasswordChanged = () => {
+    if (password.length < 1) {
+      if (name.length < 1 || surname.length < 1) {
+        setErrorMessage("Please fill all fields");
+        return false;
+      }
+      return true;
+    }
+    return false;
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -46,28 +78,28 @@ export default function Profile({ isTokenPresent }) {
     try {
       setErrorMessage("");
 
-      if (name.length < 1) {
-        setErrorMessage("You must enter a name");
+      const passwordVerification = verifyPassword();
+      if (passwordVerification) {
+        const nameVerification = verifyName();
+
+        if (nameVerification) {
+          // eslint-disable-next-line no-unused-vars
+          const response = await axios.post(
+            // "https://strateg-in.herokuapp.com/user/update",
+            "http://localhost:4000/user/update",
+            {
+              userId,
+              name,
+              surname,
+              password,
+            }
+          );
+
+          setUpdatedInformations(true);
+        }
       } else {
-        if (password) {
-          if (password.length < 8) {
-            setErrorMessage(
-              "Your password must contain at least eight characters"
-            );
-          } else {
-            // eslint-disable-next-line no-unused-vars
-            const response = await axios.post(
-              // "https://strateg-in.herokuapp.com/user/update",
-              "http://localhost:4000/user/update",
-              {
-                userId,
-                name,
-                password,
-              }
-            );
-            setUpdatedInformations(true);
-          }
-        } else {
+        const nameVerification = verifyNameWithoutPasswordChanged();
+        if (nameVerification) {
           // eslint-disable-next-line no-unused-vars
           const response = await axios.post(
             // "https://strateg-in.herokuapp.com/user/update",
@@ -76,13 +108,13 @@ export default function Profile({ isTokenPresent }) {
             {
               userId,
               name,
+              surname,
             }
           );
           setUpdatedInformations(true);
         }
       }
     } catch (error) {
-      console.log(error);
       setErrorMessage(error.response.data.message);
     }
   };
@@ -114,6 +146,18 @@ export default function Profile({ isTokenPresent }) {
           placeholder="Name"
           value={name}
           onChange={(event) => setName(event.target.value)}
+        />
+
+        <label className={styles.label} htmlFor="surname">
+          Surname:
+        </label>
+        <input
+          className={styles.input}
+          type="text"
+          id="surname"
+          placeholder="Surname"
+          value={surname}
+          onChange={(event) => setSurname(event.target.value)}
         />
 
         <label className={styles.label} htmlFor="password">

@@ -20,14 +20,15 @@ export default function Login({ isTokenPresent, setIsTokenPresent }) {
       setErrorMessage("");
 
       const response = await axios.post(
-        "https://strateg-in.herokuapp.com/login",
+        // "https://strateg-in.herokuapp.com/login",
+        "http://localhost:4000/login",
         {
           email,
           password,
         }
       );
-
       Cookies.set("token", response.data.token);
+      Cookies.set("userId", response.data._id);
       setIsTokenPresent(true);
       navigate("/");
     } catch (error) {
