@@ -18,7 +18,8 @@
   margin-bottom: 0.5em;
 }
 
-.input {
+.input,
+.ReadyOnly_input {
   margin-bottom: 1em;
   border: 1px solid grey;
   border-radius: 0.25em;
@@ -28,6 +29,10 @@
 
 .input:focus {
   border: 1px solid black;
+}
+
+.ReadyOnly_input {
+  background-color: lightgrey;
 }
 
 .button {

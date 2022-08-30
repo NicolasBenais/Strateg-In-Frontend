@@ -21,6 +21,7 @@ export default function Header({ isTokenPresent, setIsTokenPresent }) {
     setIsTokenPresent(false);
     Cookies.remove("token");
     navigate("/register");
+    setShownMenu(false);
   };
 
   return (
