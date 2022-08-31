@@ -1,12 +1,18 @@
 import { Select } from "antd";
-import "antd/dist/antd.css";
+import "antd/dist/antd.min.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
 // Styles
 import styles from "./AssignedTo.module.css";
 
-export default function AssignedTo({ setAssignedTo }) {
+export default function AssignedTo({
+  setAssignedTo,
+  disabled,
+  value,
+  task,
+  setTask,
+}) {
   const { Option } = Select;
 
   const [users, setUsers] = useState([]);
@@ -24,12 +30,23 @@ export default function AssignedTo({ setAssignedTo }) {
   }, []);
 
   const handleChange = (value) => {
-    setAssignedTo(value);
+    if (task) {
+      const updatedTask = { ...task };
+      updatedTask.assignedTo = value;
+      setTask(updatedTask);
+    } else {
+      setAssignedTo(value);
+    }
   };
 
   return (
-    <Select className={styles.input} onChange={handleChange}>
-      {users.map((user, index) => {
+    <Select
+      className={styles.input}
+      onChange={handleChange}
+      disabled={disabled}
+      defaultValue={value ? value : ""}
+    >
+      {users.map((user) => {
         return (
           <Option key={user._id} value={user._id}>
             {user.surname}

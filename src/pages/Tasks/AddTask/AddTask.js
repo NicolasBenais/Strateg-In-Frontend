@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 
 // Components
-import "antd/dist/antd.css";
+import "antd/dist/antd.min.css";
 import { DatePicker, InputNumber } from "antd";
 import AssignedTo from "../../../components/AssignedTo/AssignedTo";
 
@@ -24,14 +24,7 @@ export default function AddTask({ isTokenPresent }) {
   const [errorMessage, setErrorMessage] = useState("");
 
   const verifyInformations = () => {
-    if (
-      !title ||
-      !creator ||
-      !assignedTo ||
-      !targetDate ||
-      !priority ||
-      !estimatedTime
-    ) {
+    if (!title || !creator || !assignedTo || !targetDate || !estimatedTime) {
       setErrorMessage("Please fill all fields");
       return false;
     }
@@ -102,7 +95,7 @@ export default function AddTask({ isTokenPresent }) {
         />
 
         <label className={styles.label} htmlFor="estimatedTime">
-          Estimated time:
+          Estimated time (min.):
         </label>
         <InputNumber
           className={styles.time_input}

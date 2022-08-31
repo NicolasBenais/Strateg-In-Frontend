@@ -9,6 +9,7 @@ import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
 import Profile from "./pages/Profile/Profile";
 import AddTask from "./pages/Tasks/AddTask/AddTask";
+import UpdateTask from "./pages/Tasks/UpdateTask/UpdateTask";
 
 // Components
 import Header from "./components/Header/Header";
@@ -55,6 +56,11 @@ function App() {
         <Route
           path="/tasks/add-task"
           element={<AddTask isTokenPresent={isTokenPresent} />}
+        />
+
+        <Route
+          path={"/task/update"}
+          element={<UpdateTask isTokenPresent={isTokenPresent} />}
         />
       </Routes>
     </Router>

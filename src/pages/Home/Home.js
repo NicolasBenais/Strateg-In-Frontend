@@ -3,20 +3,21 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 // Components
-import UserThumbnail from "../../components/UserThumbnail/UserThumbnail";
+import "antd/dist/antd.min.css";
+import { DatePicker, InputNumber } from "antd";
+import AssignedTo from "../../components/AssignedTo/AssignedTo";
 
 // Styles
 import styles from "./Home.module.css";
 
 export default function Home({ isTokenPresent }) {
   const [isLoading, setIsLoading] = useState(true);
-  const [tasks, setTasks] = useState(null);
+  const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get("http://localhost:4000/tasks");
-        console.log(response.data);
         setTasks(response.data);
         setIsLoading(false);
       } catch (error) {
@@ -30,16 +31,43 @@ export default function Home({ isTokenPresent }) {
   return !isTokenPresent ? (
     <Navigate to="/register" />
   ) : (
-    <main className={styles.main}>
-      <Link to="/tasks/add-task">+ Add task</Link>
+    !isLoading && (
+      <main className={styles.main}>
+        <Link to="/tasks/add-task">+ Add task</Link>
 
-      {/* {tasks.map((task) => {
-        return (
-          <div className={styles.container} key={task._id}>
-            <UserThumbnail userId={task.assignedTo} />
-          </div>
-        );
-      })} */}
-    </main>
+        {tasks.map((task) => {
+          return (
+            !task.done && (
+              <form className={styles.form} key={task._id}>
+                <input
+                  className={styles.input}
+                  type="text"
+                  value={task.title}
+                  disabled={true}
+                />
+
+                <AssignedTo disabled={true} />
+
+                <DatePicker
+                  className={styles.datePicker_input}
+                  disabled={true}
+                />
+
+                <InputNumber
+                  className={styles.time_input}
+                  step={10}
+                  disabled={true}
+                />
+
+                <input type="checkbox" name="" id="" />
+                <Link to="/task/update" state={{ taskId: task._id }}>
+                  <button className={styles.button}>Modify</button>
+                </Link>
+              </form>
+            )
+          );
+        })}
+      </main>
+    )
   );
 }
