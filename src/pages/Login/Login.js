@@ -20,8 +20,8 @@ export default function Login({ isTokenPresent, setIsTokenPresent }) {
       setErrorMessage("");
 
       const response = await axios.post(
-        // "https://strateg-in.herokuapp.com/login",
-        "http://localhost:4000/login",
+        "https://strateg-in.herokuapp.com/login",
+        // "http://localhost:4000/login",
         {
           email,
           password,
